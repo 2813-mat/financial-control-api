@@ -1,14 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-// Rota de teste
-router.get('/', (req, res) => {
-  res.send('API de Controle Financeiro - Rotas funcionando!');
-});
+const usuarioController = require('../Components/Usuarios/controllers/usuarioController');
 
-// Exemplo de rota de usuário
-router.get('/usuarios', (req, res) => {
-  res.json({ mensagem: 'Listar usuários (exemplo)' });
-});
+router.post('/usuarios', usuarioController.criarUsuario);
+router.get('/usuarios', usuarioController.listarUsuarios);
+router.delete('/usuarios/:id', usuarioController.apagarUsuario);
+router.put('/usuarios/:id', usuarioController.ativarUsuario);
 
 module.exports = router;
