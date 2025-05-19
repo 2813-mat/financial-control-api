@@ -8,12 +8,14 @@ datasource db {
 }
 
 model Usuario {
-  id        Int           @id @default(autoincrement())
-  nome      String
-  email     String        @unique
-  senhaHash String
-  criadoEm  DateTime      @default(now())
-  transacoes Transacao[]
+  id          Int           @id @default(autoincrement())
+  nome        String
+  email       String        @unique
+  senhaHash   String
+  ativo       Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  transacoes  Transacao[]
 }
 
 model Categoria {
