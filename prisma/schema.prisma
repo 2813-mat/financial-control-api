@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id        Int           @id @default(autoincrement())
+  nome      String
+  email     String        @unique
+  senhaHash String
+  criadoEm  DateTime      @default(now())
+  transacoes Transacao[]
+}
+
+model Categoria {
+  id        Int           @id @default(autoincrement())
+  nome      String
+  tipo      TipoTransacao // "RECEITA" ou "DESPESA"
+  transacoes Transacao[]
+}
+
+model Transacao {
+  id         Int       @id @default(autoincrement())
+  valor      Float
+  data       DateTime
+  descricao  String?
+  tipo       TipoTransacao
+  usuarioId  Int
+  categoriaId Int
+
+  usuario    Usuario    @relation(fields: [usuarioId], references: [id])
+  categoria  Categoria  @relation(fields: [categoriaId], references: [id])
+}
+
+enum TipoTransacao {
+  RECEITA
+  DESPESA
+}
