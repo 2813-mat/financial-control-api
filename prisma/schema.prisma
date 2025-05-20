@@ -12,18 +12,23 @@ model Usuario {
   nome        String
   email       String        @unique
   senhaHash   String
+  criadoEm    DateTime      @default(now())
+  atualizadoEm DateTime     @updatedAt
   ativo       Boolean       @default(true)
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
   transacoes  Transacao[]
+  categorias  Categoria[]   // <- relação reversa
 }
 
+
 model Categoria {
-  id        Int           @id @default(autoincrement())
-  nome      String
-  tipo      TipoTransacao // "RECEITA" ou "DESPESA"
+  id         Int            @id @default(autoincrement())
+  nome       String
+  tipo       TipoTransacao
+  usuarioId  Int
+  usuario    Usuario        @relation(fields: [usuarioId], references: [id])
   transacoes Transacao[]
 }
+
 
 model Transacao {
   id         Int       @id @default(autoincrement())
