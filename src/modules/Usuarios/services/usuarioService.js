@@ -27,6 +27,10 @@ async function obterUsuarios() {
   return usuarioRepository.listarUsuarios();
 }
 
+async function encontrarPorEmail(email) {
+  return usuarioRepository.encontrarPorEmail(email);
+}
+
 async function apagarUsuario(id) {
   const usuario = await usuarioRepository.buscarPorId(id);
 
@@ -51,5 +55,6 @@ module.exports = {
   cadastrarUsuario,
   obterUsuarios,
   apagarUsuario,
-  ativarUsuario
+  ativarUsuario,
+  encontrarPorEmail
 };
