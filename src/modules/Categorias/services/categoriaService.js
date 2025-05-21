@@ -22,7 +22,7 @@ async function obterCategorias() {
 }
 
 async function apagarCategoria(id) {
-  const categoria = await categoriaRepository.buscarPorId(id);
+  const categoria = await categoriaRepository.deletarCategoria(id);
   if (!categoria) {
     throw new Error('Categoria não encontrada.');
   }
