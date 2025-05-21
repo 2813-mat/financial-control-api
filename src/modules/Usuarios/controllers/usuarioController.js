@@ -42,9 +42,26 @@ async function ativarUsuario(req, res) {
   }
 }
 
+async function buscarPorEmail(req, res) {
+  const { email } = req.query;
+
+  try {
+    const usuarioEmail = await usuarioService.encontrarPorEmail(email);
+
+    if (!usuarioEmail) {
+      return res.status(404).json({ erro: 'Usuário não encontrado.' });
+    }
+
+    res.status(200).json(usuarioEmail)
+  } catch (error) {
+    res.status(500).json({erro: 'Não foi possível encontrar um usuário com este e-mail.'})
+  }
+}
+
 module.exports = {
   criarUsuario,
   listarUsuarios,
   apagarUsuario,
-  ativarUsuario
+  ativarUsuario,
+  buscarPorEmail
 };
