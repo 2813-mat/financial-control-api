@@ -16,8 +16,23 @@ services:
     networks:
       - controle_net
 
+  mongodb:
+    image: mongo:latest
+    container_name: controle_financeiro_mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: root
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - controle_net
+
 volumes:
   postgres_data:
+  mongo_data:
 
 networks:
   controle_net:
