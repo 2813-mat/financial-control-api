@@ -1,0 +1,341 @@
+{
+	"info": {
+		"_postman_id": "dd56104b-2dee-484f-a628-84e2f6813254",
+		"name": "API financial Control",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40180191"
+	},
+	"item": [
+		{
+			"name": "Usuários",
+			"item": [
+				{
+					"name": "Criar usuário",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"mateus\",\r\n    \"email\": \"mateus@admin\",\r\n    \"senha\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/usuarios",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar todo os usuários",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJtYXRldXNAYWRtaW4iLCJpYXQiOjE3NDc3NTM2NDF9.K-gw0HOoHxwctK8acTw-K-f9sjhpmZx1J3A8ljcMaT8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3002/usuarios",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apagar usuário",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:3002/usuarios/1",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"usuarios",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ativar usuário",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:3002/usuarios/4",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"usuarios",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procurar usuario por email",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJtYXRldXNAYWRtaW4iLCJpYXQiOjE3NDc3NTM2NDF9.K-gw0HOoHxwctK8acTw-K-f9sjhpmZx1J3A8ljcMaT8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/usuarios/email?email=thais@admin",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"usuarios",
+								"email"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "thais@admin"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Autenticação",
+			"item": [
+				{
+					"name": "Logar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"thais@admin\",\r\n    \"senha\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categorias",
+			"item": [
+				{
+					"name": "Listar todas as categorias",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzcsImVtYWlsIjoidGhhaXNAYWRtaW4iLCJpYXQiOjE3NDc3Njg4NDB9.sgafDo8YS9m0dQprlGhlBDXmdJBjzlaiRFlSjRVTDRg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3002/categorias",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar categorias",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzcsImVtYWlsIjoidGhhaXNAYWRtaW4iLCJpYXQiOjE3NDc3Njg4NDB9.sgafDo8YS9m0dQprlGhlBDXmdJBjzlaiRFlSjRVTDRg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"mercado\",\r\n    \"tipo\": \"receita\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/categorias",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apagar categorias",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzcsImVtYWlsIjoidGhhaXNAYWRtaW4iLCJpYXQiOjE3NDc3Njg4NDB9.sgafDo8YS9m0dQprlGhlBDXmdJBjzlaiRFlSjRVTDRg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3002/categorias/4",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"categorias",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transações",
+			"item": [
+				{
+					"name": "Buscar transações",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzcsImVtYWlsIjoidGhhaXNAYWRtaW4iLCJpYXQiOjE3NDg2OTgzNTl9.xp2hgOAHSQ0sOvZmhYQ8rxKAsbVnLly-XADak9mPWes",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3002/transacoes",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"transacoes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzcsImVtYWlsIjoidGhhaXNAYWRtaW4iLCJpYXQiOjE3NDg2OTgzNTl9.xp2hgOAHSQ0sOvZmhYQ8rxKAsbVnLly-XADak9mPWes",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"valor\": 5000.00,\r\n    \"data\": \"29/05/2025\",\r\n    \"descricao\": \"Compra de uma TV\",\r\n    \"tipo\": \"DESPESA\",\r\n    \"categoriaNome\": \"Compra online\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3002/transacoes",
+							"host": [
+								"localhost"
+							],
+							"port": "3002",
+							"path": [
+								"transacoes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
