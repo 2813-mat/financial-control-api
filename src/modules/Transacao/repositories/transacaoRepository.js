@@ -57,7 +57,6 @@ async function criarTransacao({ valor, data, descricao, tipo, usuarioId, categor
       valor: valorNumerico,
       data: dataFormatada,
       descricao,
-      tipo: tipoEnum,
       usuarioId,
       categoriaId: categoria.id
     }

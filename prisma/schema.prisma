@@ -35,7 +35,6 @@ model Transacao {
   valor      Float
   data       DateTime
   descricao  String?
-  tipo       TipoTransacao
   usuarioId  Int
   categoriaId Int
 
