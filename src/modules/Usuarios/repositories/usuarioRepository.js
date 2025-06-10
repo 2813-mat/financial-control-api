@@ -32,11 +32,21 @@ async function ativarUsuario(id, status) {
   });
 }
 
+async function atualizarTipoUsuario(tipoUsuario, email) {
+  const tipoEnum = tipoUsuario.toUpperCase();
+  
+  return prisma.usuario.update({
+    where: { email },
+    data: { tipo: tipoEnum},
+  })
+}
+
 module.exports = {
   encontrarPorEmail,
   criarUsuario,
   listarUsuarios,
   buscarPorId,
   atualizarStatus,
-  ativarUsuario
+  ativarUsuario,
+  atualizarTipoUsuario
 };
