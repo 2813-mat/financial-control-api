@@ -1,3 +1,4 @@
+const e = require('express');
 const usuarioRepository = require('../repositories/usuarioRepository');
 const bcrypt = require('bcrypt')
 
@@ -31,24 +32,43 @@ async function encontrarPorEmail(email) {
   return usuarioRepository.encontrarPorEmail(email);
 }
 
-async function apagarUsuario(id) {
-  const usuario = await usuarioRepository.buscarPorId(id);
+async function apagarUsuario(id, role) {
+  if(role === 'ADMIN'){
+    const usuario = await usuarioRepository.buscarPorId(id);
 
-  if(!usuario){
-    throw new Error ('Usuário não encontrado.');
+    if(!usuario){
+        throw new Error ('Usuário não encontrado.');
+      }
+
+    return usuarioRepository.atualizarStatus(id, false);
+
+  }else{
+    throw new Error ('Somente administradores podem excluir usuários.')
   }
-
-  return usuarioRepository.atualizarStatus(id, false);
 }
 
-async function ativarUsuario(id){
-  const usuario = await usuarioRepository.buscarPorId(id);
+async function ativarUsuario(id, role){
+  if(role === 'ADMIN'){
+    const usuario = await usuarioRepository.buscarPorId(id);
 
-   if(!usuario){
-    throw new Error ('Usuário não encontrado.');
+    if(!usuario){
+      throw new Error ('Usuário não encontrado.');
+    }
+
+    return usuarioRepository.ativarUsuario(id, true);
+  }else{
+    throw new Error ('Somente administradores podem ativar usuários.')
+  }
+}
+
+async function atualizarTipoUsuario(tipoUsuario, email) {
+  const usuario = await usuarioRepository.encontrarPorEmail(email);
+
+  if(!usuario){
+    throw new Error ('Não existe usuário com este e-mail');
   }
 
-  return usuarioRepository.ativarUsuario(id, true);
+  return await usuarioRepository.atualizarTipoUsuario(tipoUsuario, email);
 }
 
 module.exports = {
@@ -56,5 +76,6 @@ module.exports = {
   obterUsuarios,
   apagarUsuario,
   ativarUsuario,
-  encontrarPorEmail
+  encontrarPorEmail,
+  atualizarTipoUsuario
 };
