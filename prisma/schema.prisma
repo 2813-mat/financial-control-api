@@ -14,27 +14,29 @@ enum TipoUsuario {
 }
 
 model Grupo {
-  id        Int       @id @default(autoincrement())
-  nome      String
-  usuarios  Usuario[]
-  criadoEm  DateTime  @default(now())
+  id         Int       @id @default(autoincrement())
+  nome       String
+  usuarios   Usuario[]
+  criadorId  Int
+  criador    Usuario   @relation("CriadorGrupo", fields: [criadorId], references: [id])
+  criadoEm   DateTime  @default(now())
 }
 
 model Usuario {
-  id           Int           @id @default(autoincrement())
-  nome         String
-  email        String        @unique
-  senhaHash    String
-  tipo         TipoUsuario   @default(COMUM)
-  grupoId      Int?
-  grupo        Grupo?        @relation(fields: [grupoId], references: [id])
-  criadoEm     DateTime      @default(now())
-  atualizadoEm DateTime      @updatedAt
-  ativo        Boolean       @default(true)
-  transacoes   Transacao[]
-  categorias   Categoria[]
+  id            Int           @id @default(autoincrement())
+  nome          String
+  email         String        @unique
+  senhaHash     String
+  tipo          TipoUsuario   @default(COMUM)
+  grupoId       Int?
+  grupo         Grupo?        @relation(fields: [grupoId], references: [id])
+  gruposCriados Grupo[]       @relation("CriadorGrupo")
+  criadoEm      DateTime      @default(now())
+  atualizadoEm  DateTime      @updatedAt
+  ativo         Boolean       @default(true)
+  transacoes    Transacao[]
+  categorias    Categoria[]
 }
-
 
 model Categoria {
   id         Int            @id @default(autoincrement())
@@ -45,17 +47,16 @@ model Categoria {
   transacoes Transacao[]
 }
 
-
 model Transacao {
-  id         Int       @id @default(autoincrement())
-  valor      Float
-  data       DateTime
-  descricao  String?
-  usuarioId  Int
+  id          Int       @id @default(autoincrement())
+  valor       Float
+  data        DateTime
+  descricao   String?
+  usuarioId   Int
   categoriaId Int
 
-  usuario    Usuario    @relation(fields: [usuarioId], references: [id])
-  categoria  Categoria  @relation(fields: [categoriaId], references: [id])
+  usuario     Usuario    @relation(fields: [usuarioId], references: [id])
+  categoria   Categoria  @relation(fields: [categoriaId], references: [id])
 }
 
 enum TipoTransacao {

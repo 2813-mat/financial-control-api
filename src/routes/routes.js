@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
-
 const usuariosRoutes = require('./usuarioRoutes');
 const authRoutes = require('./authRoutes');
 const categoriaRoutes = require('./categoriaRoutes');
 const transacaoRoutes = require('./transacaoRoutes');
+const gruposRoutes = require('./gruposRoutes');
 
+router.use(gruposRoutes);
 router.use(usuariosRoutes);
 router.use(authRoutes);
 router.use(categoriaRoutes);
