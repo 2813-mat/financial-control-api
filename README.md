@@ -53,8 +53,8 @@ These instructions will help you set up a local development environment.
 
 ## ✅ To-Do
 
-- [ ] Add unit tests
-- [ ] Add Swagger documentation
+- [✅] Add unit tests
+- [✅] Add Swagger documentation
 - [ ] Implement user roles
 - [ ] Add transaction categories
 
