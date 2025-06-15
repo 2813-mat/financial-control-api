@@ -12,9 +12,16 @@ async function cadastrarUsuario({ nome, email, senha }) {
   if (existente) {
     throw new Error('E-mail já está em uso.');
   }
+  const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if(!regexEmail.test(email)){
+    throw new Error('Email inválido, tente novamente.');
+  }
+
 
   const saltRounds = 10;
   const senhaHash = await bcrypt.hash(senha, saltRounds);
+
+
 
   // Aqui você pode adicionar hash de senha futuramente
   return usuarioRepository.criarUsuario({
