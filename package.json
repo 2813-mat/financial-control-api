@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "test:integration": "jest tests/integration/ --detectOpenHandles",
+    "test:unit": "jest tests/unit",
+    "test:integration": "jest tests/integration",
     "start-dev": "nodemon src/index.js",
     "docker:up": "docker-compose up -d",
     "docker:stop": "docker-compose stop"
