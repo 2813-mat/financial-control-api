@@ -10,8 +10,6 @@ describe('Usuario Service - cadastrarUsuario', () => {
     jest.clearAllMocks(); // Reseta os mocks entre testes
   });
 
-  debugger;
-
   it('deve chamar encontrarPorEmail com o e-mail correto', async () => {
     // Configura os mocks
     usuarioRepository.encontrarPorEmail.mockResolvedValue(null);
