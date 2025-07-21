@@ -30,6 +30,28 @@ services:
     networks:
       - controle_net
 
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: controle_financeiro_api
+    restart: unless-stopped
+    ports:
+      - "3002:3000" 
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - postgres
+      - mongodb
+    networks:
+      - controle_net
+    environment:
+      NODE_ENV: development
+      PORT: 3000 
+      DATABASE_URL: postgres://root:admin@postgres:5432/controle_financeiro
+      MONGO_CONNECTION_URI: mongodb://admin:root@mongodb:27017
+
 volumes:
   postgres_data:
   mongo_data:
