@@ -11,7 +11,7 @@ async function autenticarUsuario(email, senha) {
   const senhaValida = await bcrypt.compare(senha, usuario.senhaHash);
   if (!senhaValida) throw new Error('Senha incorreta.');
 
-  const payload = { id: usuario.id, email: usuario.email };
+  const payload = { id: usuario.id, email: usuario.email, role: usuario.tipo };
   const token = jwt.sign(payload, JWT_SECRET);
 
   return token;
