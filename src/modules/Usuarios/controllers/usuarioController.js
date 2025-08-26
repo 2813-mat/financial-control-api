@@ -74,11 +74,23 @@ async function atualizarTipoUsuario(req, res) {
   }
 }
 
+async function atualizarSenha(req, res) {
+  const {senhaAntiga, senhaNova, email} = req.body;
+
+  try {
+    const response = await usuarioService.updatePassword(senhaAntiga, senhaNova, email);
+    res.status(200).json({message: 'Senha alterada com sucesso', response})
+  } catch (error) {
+    res.status(500).json({ erro: `Ocorreu um erro: ${error}`});
+  }
+}
+
 module.exports = {
   criarUsuario,
   listarUsuarios,
   apagarUsuario,
   ativarUsuario,
   buscarPorEmail,
-  atualizarTipoUsuario
+  atualizarTipoUsuario,
+  atualizarSenha
 };

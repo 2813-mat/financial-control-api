@@ -21,10 +21,8 @@ async function logRequests(req, res, next) {
     }
   }
 
-  // Captura o método original `res.json`
   const originalJson = res.json;
 
-  // Intercepta a resposta JSON
   res.json = async function (body) {
     if (res.statusCode >= 400) {
       const erro = body?.erro || body?.message || 'Erro não especificado';
@@ -45,11 +43,9 @@ async function logRequests(req, res, next) {
       }
     }
 
-    // Chama o método original de envio da resposta
     return originalJson.call(this, body);
   };
 
-  // Também registra requisições de sucesso
   res.on('finish', async () => {
     if (res.statusCode < 400) {
       try {
