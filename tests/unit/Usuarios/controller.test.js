@@ -53,3 +53,48 @@ describe('Usuario Controller - criarUsuario', () => {
     expect(mockRes.json).toHaveBeenCalledWith({ erro: 'Email já existe' });
   });
 });
+
+describe('Usuario Controller - atualizarSenha', () => {
+  let mockReq, mockRes, mockNext;
+
+  beforeEach(() => {
+    mockReq = {
+      body: {
+        email: 'teste@example.com',
+        senhaAntiga: '123456',
+        senhaNova: 'Teste@123'
+      }
+    };
+
+    mockRes = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn()
+    };
+  });
+
+  it('deve retornar 200 e o usuário que teve a senha alterada em caso de sucesso', async () => {
+    usuarioService.updatePassword.mockResolvedValue({ message: 'Senha alterada com sucesso' });
+
+    await usuarioController.atualizarSenha(mockReq, mockRes);
+
+    expect(usuarioService.updatePassword).toHaveBeenCalledWith({
+      email: 'teste@example.com',
+      senhaAntiga: '123456',
+      senhaNova: 'Teste@123'
+    });
+    expect(mockRes.status).toHaveBeenCalledWith(200);
+    expect(mockRes.json).toHaveBeenCalledWith({
+      message: 'Senha alterada com sucesso',
+      response: { message: 'Senha alterada com sucesso' }
+    });
+  });
+
+ it('deve retornar 500 em caso de erro no service', async () => {
+    usuarioService.updatePassword.mockRejectedValue(new Error('Senha antiga incorreta. Tente novamente.'));
+
+    await usuarioController.atualizarSenha(mockReq, mockRes);
+
+    expect(mockRes.status).toHaveBeenCalledWith(500);
+    expect(mockRes.json).toHaveBeenCalledWith({ erro: 'Ocorreu um erro: Error: Senha antiga incorreta. Tente novamente.' });
+  });
+});

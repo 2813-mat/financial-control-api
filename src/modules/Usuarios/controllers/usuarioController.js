@@ -78,7 +78,7 @@ async function atualizarSenha(req, res) {
   const {senhaAntiga, senhaNova, email} = req.body;
 
   try {
-    const response = await usuarioService.updatePassword(senhaAntiga, senhaNova, email);
+    const response = await usuarioService.updatePassword({ senhaAntiga, senhaNova, email });
     res.status(200).json({message: 'Senha alterada com sucesso', response})
   } catch (error) {
     res.status(500).json({ erro: `Ocorreu um erro: ${error}`});
