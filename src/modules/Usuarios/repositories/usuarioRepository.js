@@ -32,6 +32,13 @@ async function ativarUsuario(id, status) {
   });
 }
 
+async function atualizaSenha(id, novaSenhaHash){
+  return prisma.usuario.update({
+    where: {id},
+    data: { senhaHash: novaSenhaHash},
+  });
+}
+
 async function atualizarTipoUsuario(tipoUsuario, email) {
   const tipoEnum = tipoUsuario.toUpperCase();
   
@@ -48,5 +55,6 @@ module.exports = {
   buscarPorId,
   atualizarStatus,
   ativarUsuario,
-  atualizarTipoUsuario
+  atualizarTipoUsuario,
+  atualizaSenha
 };
