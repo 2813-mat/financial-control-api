@@ -34,10 +34,6 @@ async function obterUsuarios() {
 
 async function encontrarPorEmail(email) {
   const usuario = usuarioRepository.encontrarPorEmail(email);
-   if(!usuario){
-    throw new Error ('Não existe usuário com este e-mail');
-  };
-
   return usuario;
 };
 
@@ -82,6 +78,9 @@ async function atualizarTipoUsuario(tipoUsuario, email) {
 
 async function updatePassword(senhaAntiga, senhaNova, email) {
   const usuario = await encontrarPorEmail(email);
+    if (!usuario) {
+      throw new Error('Não existe usuário com este e-mail');
+    }
 
   const senhaValida = await bcrypt.compare(senhaAntiga, usuario.senhaHash);
     if (!senhaValida) {
